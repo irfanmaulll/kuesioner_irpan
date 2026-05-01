@@ -75,7 +75,7 @@
         <div class="bar-bg"><div class="bar-fill" id="progress"></div></div>
     </div>
 
-    <!-- TAMPILAN AWAL YANG PANJANG & MEWAH -->
+    <!-- TAMPILAN AWAL YANG PANJANG & FORMAL -->
     <div class="step active" id="s0">
         <div class="profil-badge">
             <div class="avatar">👨‍💼</div>
@@ -86,18 +86,20 @@
         </div>
         <h2>Kuesioner Statistika Bisnis</h2>
         <div class="pembukaan-teks">
-            Halo, saya Irpan. Terima kasih sudah bersedia meluangkan waktu untuk membantu penelitian mandiri saya. Kuesioner ini dirancang untuk mengumpulkan data primer guna memenuhi tugas mata kuliah <b>Statistika Bisnis</b> semester ini. Seluruh jawaban Anda akan diproses secara otomatis dan dijaga kerahasiaannya.
+            Halo, perkenalkan saya Irpan. Terima kasih banyak telah meluangkan waktu berharga Anda untuk membantu pengisian data kuesioner ini. Penelitian mandiri ini dilakukan guna memenuhi tugas akademik pada mata kuliah <b>Statistika Bisnis</b> di semester 4 ini. 
+            <br><br>
+            Seluruh data yang Anda berikan akan dijaga kerahasiaannya dan hanya akan dipergunakan untuk kepentingan pengolahan data statistik akademik semata. Partisipasi Anda sangat berarti bagi kelancaran penelitian saya.
         </div>
         <button class="btn-next" style="width: 100%;" onclick="pindah(0, 1)">Mulai Pengisian</button>
     </div>
 
+    <!-- SEMUA OPSI LENGKAP -->
     <div class="step" id="s1">
         <h2>Siapa Nama atau Inisial Anda?</h2>
-        <input type="text" id="nama" placeholder="Ketik di sini...">
-        <p id="err1" style="color: #f87171; font-size: 0.8rem; margin: 10px 0; display: none;">Mohon diisi untuk validasi data.</p>
+        <input type="text" id="nama" placeholder="Ketik nama di sini...">
         <div class="nav-buttons">
             <button class="btn-back" onclick="pindah(1, 0)">Kembali</button>
-            <button class="btn-next" onclick="cekInput(1, 2, 'nama', 'err1')">Lanjut</button>
+            <button class="btn-next" onclick="pindah(1, 2)">Lanjut</button>
         </div>
     </div>
 
@@ -113,10 +115,9 @@
     <div class="step" id="s3">
         <h2>Berapa Usia Anda Saat Ini?</h2>
         <input type="number" id="usia" placeholder="Contoh: 20">
-        <p id="err3" style="color: #f87171; font-size: 0.8rem; margin: 10px 0; display: none;">Usia wajib diisi.</p>
         <div class="nav-buttons">
             <button class="btn-back" onclick="pindah(3, 2)">Kembali</button>
-            <button class="btn-next" onclick="cekInput(3, 4, 'usia', 'err3')">Lanjut</button>
+            <button class="btn-next" onclick="pindah(3, 4)">Lanjut</button>
         </div>
     </div>
 
@@ -166,38 +167,32 @@
             <button class="opsi-btn" onclick="simpan('gadget', 'Hiburan'); kirimData();">Hiburan / Media Sosial</button>
             <button class="opsi-btn" onclick="simpan('gadget', 'Bisnis'); kirimData();">Pekerjaan / Bisnis</button>
         </div>
-        <div id="loading-overlay">Menyimpan data ke sistem Irpan...</div>
+        <div id="loading-overlay">Menyimpan data ke sistem...</div>
         <button class="btn-back" style="margin-top: 20px; width: 100%;" onclick="pindah(8, 7)">Kembali</button>
     </div>
 
+    <!-- TAMPILAN SUKSES -->
     <div class="step" id="s9" style="text-align: center;">
         <div style="font-size: 5rem; margin-bottom: 25px;">🎉</div>
         <h2>Data Berhasil Terkirim!</h2>
-        <p style="font-size: 1.1rem; color: #94a3b8; line-height: 1.6;">Terima kasih banyak atas partisipasinya membantu tugas Statistika Bisnis saya.</p>
+        <p style="font-size: 1.1rem; color: #94a3b8; line-height: 1.6;">Terima kasih banyak atas partisipasinya membantu penelitian Statistika Bisnis saya.</p>
         <button class="btn-next" style="width: 100%; margin-top: 30px;" onclick="location.reload()">Selesai</button>
     </div>
 </div>
 
 <script>
     let finalData = {};
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbz6CU0K9yy7NI0hNRICbvrqc915f_fUa_O0VnDjjQrPgf3CYOBaZjxS2xHcCO77nkcGjA/exec';
+    const formURL = 'https://formspree.io/f/xzdobwkn';
 
     function simpan(k, v) { finalData[k] = v; }
 
-    function cekInput(dari, ke, idInput, idErr) {
-        let val = document.getElementById(idInput).value;
-        if(val.trim() === "") {
-            document.getElementById(idErr).style.display = "block";
-        } else {
-            document.getElementById(idErr).style.display = "none";
-            finalData[idInput] = val;
-            pindah(dari, ke);
-        }
-    }
-
     function pindah(dari, ke) {
+        if(dari === 1) finalData['nama'] = document.getElementById('nama').value;
+        if(dari === 3) finalData['usia'] = document.getElementById('usia').value;
+
         document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
         document.getElementById('s' + ke).classList.add('active');
+        
         const barWrap = document.getElementById('prog-cont');
         if(ke > 0 && ke < 9) {
             barWrap.style.display = 'block';
@@ -209,17 +204,19 @@
 
     function kirimData() {
         document.getElementById('loading-overlay').style.display = 'block';
-        fetch(scriptURL, {
+        fetch(formURL, {
             method: 'POST',
-            mode: 'no-cors',
+            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
             body: JSON.stringify(finalData)
         })
-        .then(() => {
+        .then(response => {
             document.getElementById('loading-overlay').style.display = 'none';
-            pindah(8, 9);
+            if (response.ok) { pindah(8, 9); } 
+            else { alert('Gagal mengirim, mohon periksa koneksi.'); }
         })
         .catch(() => {
-            pindah(8, 9); 
+            document.getElementById('loading-overlay').style.display = 'none';
+            alert('Terjadi kesalahan teknis.');
         });
     }
 </script>

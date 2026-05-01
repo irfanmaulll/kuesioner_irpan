@@ -6,62 +6,25 @@
     <title>Kuesioner Statistika Bisnis - Irpan Maulana</title>
     <style>
         :root { --aksen: #8b5cf6; --latar: #0f172a; --kartu: rgba(30, 41, 59, 0.7); --teks: #f8fafc; }
-        
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background: radial-gradient(circle at top right, #1e1b4b, #0f172a); 
-            color: var(--teks); 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh; 
-            margin: 0; 
-            padding: 20px; 
-        }
-
-        .kuis-wrapper { 
-            background: var(--kartu); 
-            backdrop-filter: blur(12px); 
-            padding: 45px; 
-            border-radius: 24px; 
-            border: 1px solid rgba(255,255,255,0.1); 
-            width: 100%; 
-            max-width: 600px; 
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); 
-        }
-
+        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at top right, #1e1b4b, #0f172a); color: var(--teks); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
+        .kuis-wrapper { background: var(--kartu); backdrop-filter: blur(12px); padding: 45px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); width: 100%; max-width: 600px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
         .step { display: none; text-align: left; }
         .step.active { display: block; animation: fadeIn 0.4s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .profil-badge { 
-            display: flex; 
-            align-items: center; 
-            gap: 20px; 
-            background: rgba(255,255,255,0.05); 
-            padding: 20px; 
-            border-radius: 16px; 
-            margin-bottom: 35px; 
-            border: 1px solid rgba(255,255,255,0.1); 
-        }
-
+        .profil-badge { display: flex; align-items: center; gap: 20px; background: rgba(255,255,255,0.05); padding: 20px; border-radius: 16px; margin-bottom: 35px; border: 1px solid rgba(255,255,255,0.1); }
         .avatar { width: 60px; height: 60px; background: var(--aksen); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; }
         .identitas h4 { margin: 0; font-size: 1.2rem; color: #fff; }
         .identitas p { margin: 0; font-size: 0.9rem; color: #94a3b8; }
-        
         h2 { font-size: 1.5rem; margin-bottom: 25px; line-height: 1.5; color: #fff; border-left: 5px solid var(--aksen); padding-left: 20px; }
         .pembukaan-teks { font-size: 1rem; color: #cbd5e1; line-height: 1.8; text-align: justify; margin-bottom: 35px; }
-        
         input { width: 100%; padding: 18px; background: rgba(15, 23, 42, 0.6); border: 1px solid #334155; border-radius: 12px; color: white; font-size: 1rem; margin-bottom: 5px; outline: none; box-sizing: border-box; }
-        
+        .error-msg { color: #f87171; font-size: 0.85rem; margin-top: 5px; display: none; font-weight: 500; }
         .opsi-list { display: flex; flex-direction: column; gap: 15px; }
         .opsi-btn { padding: 18px; background: rgba(51, 65, 85, 0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: white; cursor: pointer; text-align: left; transition: 0.3s; font-size: 1rem; width: 100%; box-sizing: border-box; }
         .opsi-btn:hover { background: var(--aksen); transform: translateX(8px); }
-        
         .nav-buttons { display: flex; gap: 15px; margin-top: 35px; }
         .btn-back { background: transparent; border: 1px solid #334155; color: #94a3b8; padding: 16px; border-radius: 12px; cursor: pointer; flex: 1; font-size: 1rem; }
         .btn-next { background: var(--aksen); border: none; color: white; padding: 16px; border-radius: 12px; font-weight: bold; cursor: pointer; flex: 2; font-size: 1rem; }
-        
         .progress-container { margin-bottom: 35px; display: none; }
         .bar-bg { width: 100%; height: 8px; background: #334155; border-radius: 10px; overflow: hidden; }
         .bar-fill { height: 100%; background: var(--aksen); width: 0%; transition: 0.5s; }
@@ -71,18 +34,13 @@
 <body>
 
 <div class="kuis-wrapper">
-    <div class="progress-container" id="prog-cont">
-        <div class="bar-bg"><div class="bar-fill" id="progress"></div></div>
-    </div>
+    <div class="progress-container" id="prog-cont"><div class="bar-bg"><div class="bar-fill" id="progress"></div></div></div>
 
-    <!-- TAMPILAN AWAL YANG PANJANG & FORMAL -->
+    <!-- INTRO PANJANG & FORMAL -->
     <div class="step active" id="s0">
         <div class="profil-badge">
             <div class="avatar">👨‍💼</div>
-            <div class="identitas">
-                <h4>Irpan Maulana Yusup</h4>
-                <p>Mahasiswa Manajemen Smt 4</p>
-            </div>
+            <div class="identitas"><h4>Irpan Maulana Yusup</h4><p>Mahasiswa Manajemen Smt 4</p></div>
         </div>
         <h2>Kuesioner Statistika Bisnis</h2>
         <div class="pembukaan-teks">
@@ -93,16 +51,18 @@
         <button class="btn-next" style="width: 100%;" onclick="pindah(0, 1)">Mulai Pengisian</button>
     </div>
 
-    <!-- SEMUA OPSI LENGKAP -->
+    <!-- NAMA (DENGAN VALIDASI) -->
     <div class="step" id="s1">
         <h2>Siapa Nama atau Inisial Anda?</h2>
-        <input type="text" id="nama" placeholder="Ketik nama di sini...">
+        <input type="text" id="nama" placeholder="Wajib diisi...">
+        <div id="err-nama" class="error-msg">⚠️ Mohon isi nama atau inisial Anda terlebih dahulu.</div>
         <div class="nav-buttons">
             <button class="btn-back" onclick="pindah(1, 0)">Kembali</button>
-            <button class="btn-next" onclick="pindah(1, 2)">Lanjut</button>
+            <button class="btn-next" onclick="validasiDanPindah(1, 2, 'nama', 'err-nama')">Lanjut</button>
         </div>
     </div>
 
+    <!-- JENIS KELAMIN -->
     <div class="step" id="s2">
         <h2>Apa Jenis Kelamin Anda?</h2>
         <div class="opsi-list">
@@ -112,15 +72,18 @@
         <button class="btn-back" style="margin-top: 20px; width: 100%;" onclick="pindah(2, 1)">Kembali</button>
     </div>
 
+    <!-- USIA (DENGAN VALIDASI) -->
     <div class="step" id="s3">
         <h2>Berapa Usia Anda Saat Ini?</h2>
         <input type="number" id="usia" placeholder="Contoh: 20">
+        <div id="err-usia" class="error-msg">⚠️ Usia tidak boleh kosong.</div>
         <div class="nav-buttons">
             <button class="btn-back" onclick="pindah(3, 2)">Kembali</button>
-            <button class="btn-next" onclick="pindah(3, 4)">Lanjut</button>
+            <button class="btn-next" onclick="validasiDanPindah(3, 4, 'usia', 'err-usia')">Lanjut</button>
         </div>
     </div>
 
+    <!-- DOMISILI -->
     <div class="step" id="s4">
         <h2>Bagaimana Status Tempat Tinggal Anda?</h2>
         <div class="opsi-list">
@@ -130,6 +93,7 @@
         <button class="btn-back" style="margin-top: 20px; width: 100%;" onclick="pindah(4, 3)">Kembali</button>
     </div>
 
+    <!-- AKTIVITAS -->
     <div class="step" id="s5">
         <h2>Apa Aktivitas Utama Anda Sehari-hari?</h2>
         <div class="opsi-list">
@@ -140,6 +104,7 @@
         <button class="btn-back" style="margin-top: 20px; width: 100%;" onclick="pindah(5, 4)">Kembali</button>
     </div>
 
+    <!-- PENGELUARAN -->
     <div class="step" id="s6">
         <h2>Rata-rata Pengeluaran Harian Anda?</h2>
         <div class="opsi-list">
@@ -150,6 +115,7 @@
         <button class="btn-back" style="margin-top: 20px; width: 100%;" onclick="pindah(6, 5)">Kembali</button>
     </div>
 
+    <!-- WAKTU PRODUKTIF -->
     <div class="step" id="s7">
         <h2>Berapa Jam Waktu Produktif Anda per Hari?</h2>
         <div class="opsi-list">
@@ -160,6 +126,7 @@
         <button class="btn-back" style="margin-top: 20px; width: 100%;" onclick="pindah(7, 6)">Kembali</button>
     </div>
 
+    <!-- GADGET -->
     <div class="step" id="s8">
         <h2>Apa Tujuan Utama Penggunaan Gadget Anda?</h2>
         <div class="opsi-list">
@@ -171,7 +138,7 @@
         <button class="btn-back" style="margin-top: 20px; width: 100%;" onclick="pindah(8, 7)">Kembali</button>
     </div>
 
-    <!-- TAMPILAN SUKSES -->
+    <!-- SUKSES -->
     <div class="step" id="s9" style="text-align: center;">
         <div style="font-size: 5rem; margin-bottom: 25px;">🎉</div>
         <h2>Data Berhasil Terkirim!</h2>
@@ -186,13 +153,23 @@
 
     function simpan(k, v) { finalData[k] = v; }
 
-    function pindah(dari, ke) {
-        if(dari === 1) finalData['nama'] = document.getElementById('nama').value;
-        if(dari === 3) finalData['usia'] = document.getElementById('usia').value;
+    function validasiDanPindah(dari, ke, idInput, idErr) {
+        let inputElemen = document.getElementById(idInput);
+        let errorElemen = document.getElementById(idErr);
+        if (inputElemen.value.trim() === "") {
+            errorElemen.style.display = "block";
+            inputElemen.style.border = "1px solid #f87171";
+        } else {
+            errorElemen.style.display = "none";
+            inputElemen.style.border = "1px solid #334155";
+            finalData[idInput] = inputElemen.value;
+            pindah(dari, ke);
+        }
+    }
 
+    function pindah(dari, ke) {
         document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
         document.getElementById('s' + ke).classList.add('active');
-        
         const barWrap = document.getElementById('prog-cont');
         if(ke > 0 && ke < 9) {
             barWrap.style.display = 'block';

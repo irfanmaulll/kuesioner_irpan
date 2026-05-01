@@ -6,34 +6,66 @@
     <title>Kuesioner Statistika Bisnis - Irpan Maulana</title>
     <style>
         :root { --aksen: #8b5cf6; --latar: #0f172a; --kartu: rgba(30, 41, 59, 0.7); --teks: #f8fafc; }
-        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at top right, #1e1b4b, #0f172a); color: var(--teks); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px 0; }
-        .kuis-wrapper { background: var(--kartu); backdrop-filter: blur(12px); padding: 40px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); width: 90%; max-width: 500px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: radial-gradient(circle at top right, #1e1b4b, #0f172a); 
+            color: var(--teks); 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            padding: 20px; 
+        }
+
+        .kuis-wrapper { 
+            background: var(--kartu); 
+            backdrop-filter: blur(12px); 
+            padding: 45px; 
+            border-radius: 24px; 
+            border: 1px solid rgba(255,255,255,0.1); 
+            width: 100%; 
+            max-width: 600px; 
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); 
+        }
+
         .step { display: none; text-align: left; }
         .step.active { display: block; animation: fadeIn 0.4s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        .profil-badge { display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 16px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.1); }
-        .avatar { width: 50px; height: 50px; background: var(--aksen); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
-        .identitas h4 { margin: 0; font-size: 1rem; color: #fff; }
-        .identitas p { margin: 0; font-size: 0.8rem; color: #94a3b8; }
+        .profil-badge { 
+            display: flex; 
+            align-items: center; 
+            gap: 20px; 
+            background: rgba(255,255,255,0.05); 
+            padding: 20px; 
+            border-radius: 16px; 
+            margin-bottom: 35px; 
+            border: 1px solid rgba(255,255,255,0.1); 
+        }
+
+        .avatar { width: 60px; height: 60px; background: var(--aksen); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; }
+        .identitas h4 { margin: 0; font-size: 1.2rem; color: #fff; }
+        .identitas p { margin: 0; font-size: 0.9rem; color: #94a3b8; }
         
-        h2 { font-size: 1.25rem; margin-bottom: 20px; line-height: 1.5; color: #fff; border-left: 4px solid var(--aksen); padding-left: 15px; }
-        .pembukaan-teks { font-size: 0.9rem; color: #cbd5e1; line-height: 1.7; text-align: justify; margin-bottom: 20px; }
+        h2 { font-size: 1.5rem; margin-bottom: 25px; line-height: 1.5; color: #fff; border-left: 5px solid var(--aksen); padding-left: 20px; }
+        .pembukaan-teks { font-size: 1rem; color: #cbd5e1; line-height: 1.8; text-align: justify; margin-bottom: 35px; }
         
-        input { width: 100%; padding: 16px; background: rgba(15, 23, 42, 0.6); border: 1px solid #334155; border-radius: 12px; color: white; font-size: 1rem; margin-bottom: 5px; outline: none; box-sizing: border-box; transition: 0.3s; }
-        .error-hint { color: #f87171; font-size: 0.75rem; margin-bottom: 15px; display: none; }
+        input { width: 100%; padding: 18px; background: rgba(15, 23, 42, 0.6); border: 1px solid #334155; border-radius: 12px; color: white; font-size: 1rem; margin-bottom: 5px; outline: none; box-sizing: border-box; }
         
-        .opsi-list { display: flex; flex-direction: column; gap: 12px; }
-        .opsi-btn { padding: 16px; background: rgba(51, 65, 85, 0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: white; cursor: pointer; text-align: left; transition: 0.2s; font-size: 0.95rem; }
-        .opsi-btn:hover { background: var(--aksen); transform: translateX(5px); }
+        .opsi-list { display: flex; flex-direction: column; gap: 15px; }
+        .opsi-btn { padding: 18px; background: rgba(51, 65, 85, 0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: white; cursor: pointer; text-align: left; transition: 0.3s; font-size: 1rem; width: 100%; box-sizing: border-box; }
+        .opsi-btn:hover { background: var(--aksen); transform: translateX(8px); }
         
-        .nav-buttons { display: flex; gap: 12px; margin-top: 25px; }
-        .btn-back { background: transparent; border: 1px solid #334155; color: #94a3b8; padding: 14px; border-radius: 12px; cursor: pointer; flex: 1; }
-        .btn-next { background: var(--aksen); border: none; color: white; padding: 14px; border-radius: 12px; font-weight: bold; cursor: pointer; flex: 2; }
+        .nav-buttons { display: flex; gap: 15px; margin-top: 35px; }
+        .btn-back { background: transparent; border: 1px solid #334155; color: #94a3b8; padding: 16px; border-radius: 12px; cursor: pointer; flex: 1; font-size: 1rem; }
+        .btn-next { background: var(--aksen); border: none; color: white; padding: 16px; border-radius: 12px; font-weight: bold; cursor: pointer; flex: 2; font-size: 1rem; }
         
-        .progress-container { margin-bottom: 30px; display: none; }
-        .bar-bg { width: 100%; height: 6px; background: #334155; border-radius: 10px; overflow: hidden; }
+        .progress-container { margin-bottom: 35px; display: none; }
+        .bar-bg { width: 100%; height: 8px; background: #334155; border-radius: 10px; overflow: hidden; }
         .bar-fill { height: 100%; background: var(--aksen); width: 0%; transition: 0.5s; }
+        #loading-overlay { display: none; margin-top: 20px; text-align: center; color: var(--aksen); font-weight: bold; font-size: 1rem; }
     </style>
 </head>
 <body>
@@ -43,7 +75,7 @@
         <div class="bar-bg"><div class="bar-fill" id="progress"></div></div>
     </div>
 
-    <!-- S0: Pembukaan Resmi -->
+    <!-- TAMPILAN AWAL YANG PANJANG & MEWAH -->
     <div class="step active" id="s0">
         <div class="profil-badge">
             <div class="avatar">👨‍💼</div>
@@ -52,117 +84,103 @@
                 <p>Mahasiswa Manajemen Smt 4</p>
             </div>
         </div>
-        <h2>Kuesioner Penelitian Mandiri</h2>
+        <h2>Kuesioner Statistika Bisnis</h2>
         <div class="pembukaan-teks">
-            Selamat siang, saya Irpan. Dalam rangka pemenuhan tugas mata kuliah <b>Statistika Bisnis</b>, saya memerlukan data primer dari 30 responden. <br><br>
-            Informasi yang Anda berikan bersifat anonim dan akan digunakan sepenuhnya untuk analisis akademik. Terima kasih atas ketersediaan Anda.
+            Halo, saya Irpan. Terima kasih sudah bersedia meluangkan waktu untuk membantu penelitian mandiri saya. Kuesioner ini dirancang untuk mengumpulkan data primer guna memenuhi tugas mata kuliah <b>Statistika Bisnis</b> semester ini. Seluruh jawaban Anda akan diproses secara otomatis dan dijaga kerahasiaannya.
         </div>
         <button class="btn-next" style="width: 100%;" onclick="pindah(0, 1)">Mulai Pengisian</button>
     </div>
 
-    <!-- S1: Nama -->
     <div class="step" id="s1">
-        <h2>Identitas: Nama/Inisial</h2>
-        <input type="text" id="nama" placeholder="Contoh: I. Maulana">
-        <p id="err1" class="error-hint">Wajib diisi agar data valid.</p>
+        <h2>Siapa Nama atau Inisial Anda?</h2>
+        <input type="text" id="nama" placeholder="Ketik di sini...">
+        <p id="err1" style="color: #f87171; font-size: 0.8rem; margin: 10px 0; display: none;">Mohon diisi untuk validasi data.</p>
         <div class="nav-buttons">
             <button class="btn-back" onclick="pindah(1, 0)">Kembali</button>
             <button class="btn-next" onclick="cekInput(1, 2, 'nama', 'err1')">Lanjut</button>
         </div>
     </div>
 
-    <!-- S2: Jenis Kelamin -->
     <div class="step" id="s2">
-        <h2>Jenis Kelamin</h2>
+        <h2>Apa Jenis Kelamin Anda?</h2>
         <div class="opsi-list">
             <button class="opsi-btn" onclick="simpan('gender', 'Laki-laki'); pindah(2, 3)">Laki-laki</button>
             <button class="opsi-btn" onclick="simpan('gender', 'Perempuan'); pindah(2, 3)">Perempuan</button>
         </div>
-        <button class="btn-back" style="margin-top: 15px; width: 100%;" onclick="pindah(2, 1)">Kembali</button>
+        <button class="btn-back" style="margin-top: 20px; width: 100%;" onclick="pindah(2, 1)">Kembali</button>
     </div>
 
-    <!-- S3: Usia -->
     <div class="step" id="s3">
-        <h2>Usia Anda saat ini?</h2>
+        <h2>Berapa Usia Anda Saat Ini?</h2>
         <input type="number" id="usia" placeholder="Contoh: 20">
-        <p id="err3" class="error-hint">Usia diperlukan untuk klasifikasi data.</p>
+        <p id="err3" style="color: #f87171; font-size: 0.8rem; margin: 10px 0; display: none;">Usia wajib diisi.</p>
         <div class="nav-buttons">
             <button class="btn-back" onclick="pindah(3, 2)">Kembali</button>
             <button class="btn-next" onclick="cekInput(3, 4, 'usia', 'err3')">Lanjut</button>
         </div>
     </div>
 
-    <!-- S4: Domisili -->
     <div class="step" id="s4">
-        <h2>Status Tempat Tinggal</h2>
+        <h2>Bagaimana Status Tempat Tinggal Anda?</h2>
         <div class="opsi-list">
-            <button class="opsi-btn" onclick="simpan('domisili', 'Kost'); pindah(4, 5)">Rumah Sewa / Kost / Kontrak</button>
-            <button class="opsi-btn" onclick="simpan('domisili', 'Rumah Sendiri'); pindah(4, 5)">Rumah Orang Tua / Milik Pribadi</button>
-            <button class="opsi-btn" onclick="simpan('domisili', 'Lainnya'); pindah(4, 5)">Lainnya (Asrama/Apartemen)</button>
+            <button class="opsi-btn" onclick="simpan('domisili', 'Kost'); pindah(4, 5)">Kost / Kontrak / Sewa</button>
+            <button class="opsi-btn" onclick="simpan('domisili', 'Rumah'); pindah(4, 5)">Rumah Sendiri / Orang Tua</button>
         </div>
-        <button class="btn-back" style="margin-top: 15px; width: 100%;" onclick="pindah(4, 3)">Kembali</button>
+        <button class="btn-back" style="margin-top: 20px; width: 100%;" onclick="pindah(4, 3)">Kembali</button>
     </div>
 
-    <!-- S5: Status Kesibukan -->
     <div class="step" id="s5">
-        <h2>Aktivitas Utama</h2>
+        <h2>Apa Aktivitas Utama Anda Sehari-hari?</h2>
         <div class="opsi-list">
             <button class="opsi-btn" onclick="simpan('status', 'Mahasiswa'); pindah(5, 6)">Mahasiswa (Full Time)</button>
-            <button class="opsi-btn" onclick="simpan('status', 'Bekerja'); pindah(5, 6)">Karyawan / Profesional</button>
-            <button class="opsi-btn" onclick="simpan('status', 'Wirausaha'); pindah(5, 6)">Wirausaha / Pemilik Bisnis</button>
-            <button class="opsi-btn" onclick="simpan('status', 'Campuran'); pindah(5, 6)">Mahasiswa Sambil Bekerja</button>
+            <button class="opsi-btn" onclick="simpan('status', 'Bekerja'); pindah(5, 6)">Karyawan / Bekerja</button>
+            <button class="opsi-btn" onclick="simpan('status', 'Campuran'); pindah(5, 6)">Kuliah Sambil Bekerja</button>
         </div>
-        <button class="btn-back" style="margin-top: 15px; width: 100%;" onclick="pindah(5, 4)">Kembali</button>
+        <button class="btn-back" style="margin-top: 20px; width: 100%;" onclick="pindah(5, 4)">Kembali</button>
     </div>
 
-    <!-- S6: Pengeluaran Harian -->
     <div class="step" id="s6">
-        <h2>Rata-rata Pengeluaran Harian</h2>
+        <h2>Rata-rata Pengeluaran Harian Anda?</h2>
         <div class="opsi-list">
-            <button class="opsi-btn" onclick="simpan('biaya', '< 25rb'); pindah(6, 7)">Sangat Hemat (< Rp 25.000)</button>
-            <button class="opsi-btn" onclick="simpan('biaya', '25rb - 50rb'); pindah(6, 7)">Hemat (Rp 25.000 - Rp 50.000)</button>
-            <button class="opsi-btn" onclick="simpan('biaya', '50rb - 100rb'); pindah(6, 7)">Sedang (Rp 50.000 - Rp 100.000)</button>
-            <button class="opsi-btn" onclick="simpan('biaya', '> 100rb'); pindah(6, 7)">Tinggi (> Rp 100.000)</button>
+            <button class="opsi-btn" onclick="simpan('biaya', '< 25rb'); pindah(6, 7)">Dibawah Rp 25.000</button>
+            <button class="opsi-btn" onclick="simpan('biaya', '25rb-50rb'); pindah(6, 7)">Rp 25.000 - Rp 50.000</button>
+            <button class="opsi-btn" onclick="simpan('biaya', '> 50rb'); pindah(6, 7)">Diatas Rp 50.000</button>
         </div>
-        <button class="btn-back" style="margin-top: 15px; width: 100%;" onclick="pindah(6, 5)">Kembali</button>
+        <button class="btn-back" style="margin-top: 20px; width: 100%;" onclick="pindah(6, 5)">Kembali</button>
     </div>
 
-    <!-- S7: Durasi Produktivitas -->
     <div class="step" id="s7">
-        <h2>Durasi Aktivitas Produktif Sehari</h2>
+        <h2>Berapa Jam Waktu Produktif Anda per Hari?</h2>
         <div class="opsi-list">
-            <button class="opsi-btn" onclick="simpan('jam', 'Sangat Rendah'); pindah(7, 8)">Kurang dari 2 Jam</button>
-            <button class="opsi-btn" onclick="simpan('jam', 'Rendah'); pindah(7, 8)">2 - 4 Jam</button>
-            <button class="opsi-btn" onclick="simpan('jam', 'Sedang'); pindah(7, 8)">4 - 7 Jam</button>
-            <button class="opsi-btn" onclick="simpan('jam', 'Tinggi'); pindah(7, 8)">Lebih dari 7 Jam</button>
+            <button class="opsi-btn" onclick="simpan('jam', '< 4 jam'); pindah(7, 8)">Kurang dari 4 Jam</button>
+            <button class="opsi-btn" onclick="simpan('jam', '4-7 jam'); pindah(7, 8)">Sekitar 4 - 7 Jam</button>
+            <button class="opsi-btn" onclick="simpan('jam', '> 7 jam'); pindah(7, 8)">Lebih dari 7 Jam</button>
         </div>
-        <button class="btn-back" style="margin-top: 15px; width: 100%;" onclick="pindah(7, 6)">Kembali</button>
+        <button class="btn-back" style="margin-top: 20px; width: 100%;" onclick="pindah(7, 6)">Kembali</button>
     </div>
 
-    <!-- S8: Penggunaan Gadget -->
     <div class="step" id="s8">
-        <h2>Prioritas Penggunaan Gadget</h2>
+        <h2>Apa Tujuan Utama Penggunaan Gadget Anda?</h2>
         <div class="opsi-list">
-            <button class="opsi-btn" onclick="simpan('gadget', 'Akademik'); pindah(8, 9)">Pengerjaan Tugas / Belajar Mandiri</button>
-            <button class="opsi-btn" onclick="simpan('gadget', 'Entertainment'); pindah(8, 9)">Hiburan (Media Sosial, Game, Film)</button>
-            <button class="opsi-btn" onclick="simpan('gadget', 'Bisnis'); pindah(8, 9)">Pekerjaan / Bisnis / Freelance</button>
-            <button class="opsi-btn" onclick="simpan('gadget', 'Komunikasi'); pindah(8, 9)">Komunikasi (Chatting, Call)</button>
+            <button class="opsi-btn" onclick="simpan('gadget', 'Tugas'); kirimData();">Tugas Kuliah / Belajar</button>
+            <button class="opsi-btn" onclick="simpan('gadget', 'Hiburan'); kirimData();">Hiburan / Media Sosial</button>
+            <button class="opsi-btn" onclick="simpan('gadget', 'Bisnis'); kirimData();">Pekerjaan / Bisnis</button>
         </div>
-        <button class="btn-back" style="margin-top: 15px; width: 100%;" onclick="pindah(8, 7)">Kembali</button>
+        <div id="loading-overlay">Menyimpan data ke sistem Irpan...</div>
+        <button class="btn-back" style="margin-top: 20px; width: 100%;" onclick="pindah(8, 7)">Kembali</button>
     </div>
 
-    <!-- S9: Selesai -->
     <div class="step" id="s9" style="text-align: center;">
-        <div style="font-size: 4rem; margin-bottom: 20px;">📊</div>
-        <h2>Data Berhasil Direkam</h2>
-        <p>Terima kasih atas partisipasinya dalam tugas Statistika Irpan Maulana. Respon Anda sangat berharga.</p>
-        <button class="btn-next" style="width: 100%;" onclick="location.reload()">Kirim Respon Lain</button>
+        <div style="font-size: 5rem; margin-bottom: 25px;">🎉</div>
+        <h2>Data Berhasil Terkirim!</h2>
+        <p style="font-size: 1.1rem; color: #94a3b8; line-height: 1.6;">Terima kasih banyak atas partisipasinya membantu tugas Statistika Bisnis saya.</p>
+        <button class="btn-next" style="width: 100%; margin-top: 30px;" onclick="location.reload()">Selesai</button>
     </div>
 </div>
 
 <script>
     let finalData = {};
-    const totalStep = 9;
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbz6CU0K9yy7NI0hNRICbvrqc915f_fUa_O0VnDjjQrPgf3CYOBaZjxS2xHcCO77nkcGjA/exec';
 
     function simpan(k, v) { finalData[k] = v; }
 
@@ -178,16 +196,31 @@
     }
 
     function pindah(dari, ke) {
-        document.getElementById('s' + dari).classList.remove('active');
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
         document.getElementById('s' + ke).classList.add('active');
         const barWrap = document.getElementById('prog-cont');
-        if(ke > 0 && ke < totalStep) {
+        if(ke > 0 && ke < 9) {
             barWrap.style.display = 'block';
-            document.getElementById('progress').style.width = (ke / (totalStep-1) * 100) + "%";
+            document.getElementById('progress').style.width = (ke / 8 * 100) + "%";
         } else {
             barWrap.style.display = 'none';
         }
-        if(ke === totalStep) console.log("REKAP DATA IRAN:", finalData);
+    }
+
+    function kirimData() {
+        document.getElementById('loading-overlay').style.display = 'block';
+        fetch(scriptURL, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: JSON.stringify(finalData)
+        })
+        .then(() => {
+            document.getElementById('loading-overlay').style.display = 'none';
+            pindah(8, 9);
+        })
+        .catch(() => {
+            pindah(8, 9); 
+        });
     }
 </script>
 </body>
